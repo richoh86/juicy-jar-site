@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juicy Jar — a physics merge puzzle for iPhone</title>
+<meta name="description" content="Drop fruit into the jar. Two of the same merge into the next one up. Reach the watermelon before the pile crosses the line.">
+<meta property="og:title" content="Juicy Jar">
+<meta property="og:description" content="A physics merge puzzle for iPhone. Cherry to watermelon, one thumb.">
+<meta property="og:type" content="website">
+<style>
+  :root { color-scheme: light dark; --ink:#1c1a22; --dim:#6c6577; --bg:#fff; --card:#fff6ec; --line:#f2d9bd; --accent:#c2410c; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink:#ece9f1; --dim:#a49cb0; --bg:#17141d; --card:#241d2b; --line:#3b3145; --accent:#ffb26b; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0 1.25rem 4rem; background: var(--bg); color: var(--ink);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 54rem; margin: 0 auto; }
+
+  header { text-align: center; padding: 3.5rem 0 2.5rem; }
+  header img { width: 116px; height: 116px; border-radius: 26px; box-shadow: 0 10px 30px rgba(158,32,116,.25); }
+  h1 { font-size: 2.6rem; margin: 1rem 0 .4rem; letter-spacing: -.03em; }
+  .tag { font-size: 1.15rem; color: var(--dim); margin: 0; }
+  .pill {
+    display: inline-block; margin-top: 1.4rem; padding: .55rem 1.1rem; border-radius: 999px;
+    background: var(--card); border: 1px solid var(--line); color: var(--dim); font-size: .92rem;
+  }
+
+  .shots { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0 3rem; }
+  .shots img {
+    width: min(230px, 42vw); border-radius: 1.4rem; border: 1px solid var(--line);
+    box-shadow: 0 8px 26px rgba(0,0,0,.14);
+  }
+
+  h2 { font-size: 1.35rem; margin: 2.6rem 0 .8rem; letter-spacing: -.015em; }
+  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: .9rem; padding: 1.1rem 1.2rem; }
+  .card h3 { margin: 0 0 .35rem; font-size: 1rem; }
+  .card p { margin: 0; color: var(--dim); font-size: .95rem; }
+
+  footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); color: var(--dim); font-size: .9rem; text-align: center; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <img src="assets/icon.png" alt="Juicy Jar app icon">
+  <h1>Juicy Jar</h1>
+  <p class="tag">Two cherries make a strawberry.<br>Keep going and you might just grow a watermelon.</p>
+  <span class="pill">iPhone · iOS 17 or later · free, no ads</span>
+</header>
+
+<div class="shots">
+  <img src="assets/01-title.png" alt="The Juicy Jar title screen">
+  <img src="assets/03-late.png" alt="A jar filling up with merged fruit">
+  <img src="assets/05-score.png" alt="The end-of-run score card showing a new record">
+</div>
+
+<h2>How it plays</h2>
+<p>Drop fruit into the jar with one thumb. Matching fruit merges into the next one
+up the ladder — but everything you drop stays, and the jar fills faster than you
+think. Let the pile cross the line and the run is over.</p>
+
+<h2>What makes it interesting</h2>
+<div class="grid">
+  <div class="card">
+    <h3>Chains, not luck</h3>
+    <p>When a merge drops a fruit straight into its twin, the chain multiplies your
+    score. Engineering cascades beats merging the moment you can.</p>
+  </div>
+  <div class="card">
+    <h3>Real physics</h3>
+    <p>Every fruit rolls, settles and shoves the pile. A careless drop on the left
+    can cost you the run thirty seconds later.</p>
+  </div>
+  <div class="card">
+    <h3>Nothing in the way</h3>
+    <p>No ads, no accounts, no internet. The app has no network code at all, and
+    it is under four megabytes.</p>
+  </div>
+  <div class="card">
+    <h3>Picks up where you left off</h3>
+    <p>Close the app mid-run and the board is waiting exactly as you left it when
+    you come back.</p>
+  </div>
+</div>
+
+<h2>Sixteen languages</h2>
+<p>English, Korean, Japanese, Simplified and Traditional Chinese, Spanish,
+Brazilian Portuguese, French, German, Russian, Italian, Indonesian, Thai,
+Vietnamese, Turkish and Arabic — right-to-left included.</p>
+
+<footer>
+  <a href="support.html">Support</a> · <a href="privacy.html">Privacy Policy</a><br>
+  © 2026 Juicy Jar. All rights reserved.
+</footer>
+
+</div>
+</body>
+</html>
