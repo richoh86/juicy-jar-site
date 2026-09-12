@@ -2,104 +2,366 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Juicy Jar — a physics merge puzzle for iPhone</title>
-<meta name="description" content="Drop fruit into the jar. Two of the same merge into the next one up. Reach the watermelon before the pile crosses the line.">
-<meta property="og:title" content="Juicy Jar">
-<meta property="og:description" content="A physics merge puzzle for iPhone. Cherry to watermelon, one thumb.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Juicy Jar: Watermelon Merge</title>
+<meta name="description" content="Drop fruit into the jar with one thumb. Matching fruit merges into the next one up — but everything you drop stays, and the jar fills faster than you think. Let the pile cross the ">
+<link rel="canonical" href="https://richoh86.github.io/juicy-jar-site/">
+<meta name="theme-color" content="#FFF7EC">
+<meta name="apple-itunes-app" content="app-id=6794601872">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Juicy Jar">
+<meta property="og:title" content="Juicy Jar: Watermelon Merge">
+<meta property="og:description" content="Drop fruit into the jar with one thumb. Matching fruit merges into the next one up — but everything you drop stays, and the jar fills faster than you think. Let the pile cross the ">
+<meta property="og:url" content="https://richoh86.github.io/juicy-jar-site/">
+<meta property="og:image" content="https://richoh86.github.io/juicy-jar-site/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Juicy Jar: Watermelon Merge">
+<meta name="twitter:description" content="Drop fruit into the jar with one thumb. Matching fruit merges into the next one up — but everything you drop stays, and the jar fills faster than you think. Let the pile cross the ">
+<meta name="twitter:image" content="https://richoh86.github.io/juicy-jar-site/assets/img/og.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/img/icon-512.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <style>
-  :root { color-scheme: light dark; --ink:#1c1a22; --dim:#6c6577; --bg:#fff; --card:#fff6ec; --line:#f2d9bd; --accent:#c2410c; }
-  @media (prefers-color-scheme: dark) {
-    :root { --ink:#ece9f1; --dim:#a49cb0; --bg:#17141d; --card:#241d2b; --line:#3b3145; --accent:#ffb26b; }
+  :root{
+    color-scheme:light;
+    --sans:system-ui,-apple-system,'SF Pro Text',"Segoe UI",Roboto,'Helvetica Neue',Arial,sans-serif;
+    --bg:#FFF7EC;--bg2:#FFE9CF;--surface:#FFFFFF;--surface2:#FFF3E2;
+    --line:#F0DCC4;--text:#2B1A22;--dim:#6E5460;
+    --accent:#1F7A3D;--accent-2:#F2A93B;--on-accent:#FFFFFF;
+    --glow:rgba(242,169,59,.45);--halo1:rgba(242,169,59,.55);--halo2:rgba(31,122,61,.22);
+    --bar:color-mix(in srgb,#FFF7EC 82%,transparent);
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; padding: 0 1.25rem 4rem; background: var(--bg); color: var(--ink);
-    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  }
-  .wrap { max-width: 54rem; margin: 0 auto; }
-
-  header { text-align: center; padding: 3.5rem 0 2.5rem; }
-  header img { width: 116px; height: 116px; border-radius: 26px; box-shadow: 0 10px 30px rgba(158,32,116,.25); }
-  h1 { font-size: 2.6rem; margin: 1rem 0 .4rem; letter-spacing: -.03em; }
-  .tag { font-size: 1.15rem; color: var(--dim); margin: 0; }
-  .pill {
-    display: inline-block; margin-top: 1.4rem; padding: .55rem 1.1rem; border-radius: 999px;
-    background: var(--card); border: 1px solid var(--line); color: var(--dim); font-size: .92rem;
-  }
-
-  .shots { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0 3rem; }
-  .shots img {
-    width: min(230px, 42vw); border-radius: 1.4rem; border: 1px solid var(--line);
-    box-shadow: 0 8px 26px rgba(0,0,0,.14);
+  @media (prefers-color-scheme:dark){
+    :root{
+    color-scheme:dark;
+    --bg:#1B1016;--bg2:#2A1821;--surface:#241621;--surface2:#2E1C28;
+    --line:#43293A;--text:#FDF2E6;--dim:#C4A5B6;
+    --accent:#6FD48C;--accent-2:#FFC861;--on-accent:#14210F;
+    --bar:color-mix(in srgb,#1B1016 82%,transparent);
+    }
   }
 
-  h2 { font-size: 1.35rem; margin: 2.6rem 0 .8rem; letter-spacing: -.015em; }
-  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: .9rem; padding: 1.1rem 1.2rem; }
-  .card h3 { margin: 0 0 .35rem; font-size: 1rem; }
-  .card p { margin: 0; color: var(--dim); font-size: .95rem; }
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:400 clamp(1rem,.96rem + .2vw,1.125rem)/1.65 var(--sans);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.02em;line-height:1.08;
+  text-wrap:balance}
+p{margin:0}
+::selection{background:var(--accent);color:var(--on-accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:.3rem}
 
-  footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); color: var(--dim); font-size: .9rem; text-align: center; }
-  a { color: var(--accent); }
+.wrap{width:min(100% - 2.5rem,72rem);margin-inline:auto}
+@media (min-width:52rem){.wrap{width:min(100% - 5rem,72rem)}}
+
+/* ---------------------------------------------------------------- header */
+.bar{position:sticky;top:0;z-index:50;background:var(--bar);
+  border-bottom:1px solid transparent;
+  backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);
+  transition:border-color .25s ease,background .25s ease}
+.bar.is-stuck{border-bottom-color:var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:1rem;min-height:3.75rem}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;
+  font-weight:650;letter-spacing:-.01em;font-size:1rem;margin-right:auto}
+.brand img{width:1.85rem;height:1.85rem;border-radius:.48rem;
+  box-shadow:0 1px 3px rgba(0,0,0,.28),0 0 0 1px var(--line)}
+.bar nav{display:none;gap:1.5rem;font-size:.9rem;color:var(--dim)}
+.bar nav a{text-decoration:none}
+.bar nav a:hover{color:var(--text)}
+@media (min-width:46rem){.bar nav{display:flex}}
+
+.pill{display:inline-flex;align-items:center;gap:.4rem;flex:none;
+  padding:.5rem .95rem;border-radius:999px;font-size:.875rem;font-weight:600;
+  text-decoration:none;background:var(--accent);color:var(--on-accent);
+  box-shadow:0 6px 18px -8px var(--glow);transition:transform .18s ease,filter .18s ease}
+.pill:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.pill.ghost{background:transparent;color:var(--dim);border:1px solid var(--line);
+  box-shadow:none;font-weight:500;cursor:default}
+
+/* -------------------------------------------------------------- app badge */
+.badge{display:inline-block;transition:transform .18s ease,opacity .18s ease}
+.badge:hover{transform:translateY(-2px)}
+.badge img{height:3.1rem;width:auto}
+.soon{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.3rem;
+  border:1px solid var(--line);border-radius:.85rem;background:var(--surface);
+  font-size:.95rem;font-weight:600;letter-spacing:-.01em}
+.soon::before{content:"";width:.5rem;height:.5rem;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 4px var(--glow)}
+
+/* ------------------------------------------------------------------- hero */
+.hero{position:relative;isolation:isolate;overflow:hidden;
+  padding-block:clamp(3rem,2rem + 6vw,6.5rem) clamp(3.5rem,2rem + 7vw,7rem);
+  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)}
+.hero::before{content:"";position:absolute;inset:-20% -10% 0;z-index:-1;
+  background:radial-gradient(45% 45% at 18% 22%,var(--halo1),transparent 68%),
+             radial-gradient(42% 42% at 88% 8%,var(--halo2),transparent 70%);
+  pointer-events:none}
+.hero .wrap{display:grid;gap:clamp(2.5rem,1rem + 6vw,4.5rem);align-items:center}
+@media (min-width:60rem){.hero .wrap{grid-template-columns:1.05fr .95fr}}
+.kicker{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem}
+.hero h1{font-size:clamp(2.1rem,1.3rem + 3.6vw,3.85rem);max-width:19ch}
+.hero .lede{margin-top:1.4rem;max-width:56ch;font-size:clamp(1.03rem,.98rem + .34vw,1.22rem);
+  color:var(--dim);line-height:1.62}
+.cta-row{margin-top:2.2rem;display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.25rem}
+.meta{margin-top:1.1rem;font-size:.85rem;color:var(--dim);letter-spacing:.01em}
+
+/* ----------------------------------------------------------- device frame */
+.device{position:relative;width:min(100%,20.5rem);margin-inline:auto;
+  padding:.62rem;border-radius:2.75rem;
+  background:linear-gradient(155deg,#5b5b66 0%,#141419 26%,#33333c 55%,#0c0c10 82%,#43434d 100%);
+  box-shadow:0 2px 3px rgba(255,255,255,.10) inset,
+             0 34px 70px -26px rgba(0,0,0,.72),
+             0 90px 120px -60px var(--glow)}
+.device::before,.device::after{content:"";position:absolute;left:-.13rem;width:.13rem;
+  border-radius:.2rem 0 0 .2rem;background:linear-gradient(180deg,#6a6a76,#2a2a32)}
+.device::before{top:6.2rem;height:2.1rem}
+.device::after{top:8.9rem;height:2.1rem}
+.device .screen{position:relative;border-radius:2.2rem;overflow:hidden;
+  background:#000;box-shadow:0 0 0 1px rgba(0,0,0,.6)}
+.device img{width:100%;height:auto}
+.hero .device{transform:perspective(1600px) rotateY(-7deg) rotateX(2deg);
+  transform-style:preserve-3d}
+@media (max-width:60rem){.hero .device{transform:none;width:min(100%,17.5rem)}}
+
+/* --------------------------------------------------------------- features */
+.features{padding-block:clamp(3.5rem,2rem + 6vw,6.5rem);display:grid;
+  gap:clamp(3.5rem,1.5rem + 7vw,6.5rem)}
+.feature{display:grid;gap:clamp(2rem,1rem + 5vw,4.5rem);align-items:center}
+@media (min-width:58rem){
+  .feature{grid-template-columns:1fr 1fr}
+  .feature:nth-child(even) .feature-art{order:-1}
+}
+.feature-art .device{width:min(100%,17rem)}
+.eyebrow{font-size:.76rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:.9rem}
+.feature h2{font-size:clamp(1.45rem,1.12rem + 1.4vw,2.1rem);max-width:22ch}
+.feature p{margin-top:1.1rem;max-width:52ch;color:var(--dim);line-height:1.68}
+
+/* ------------------------------------------------------------------ trust */
+.trust{border-block:1px solid var(--line);background:var(--surface);
+  padding-block:clamp(2.5rem,1.5rem + 4vw,4rem)}
+.trust h2{font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--dim);font-weight:700;margin-bottom:2.2rem}
+.trust-grid{display:grid;gap:2rem 2.5rem;
+  grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
+.trust-grid h3{font-size:1.02rem;letter-spacing:-.01em;
+  padding-top:.9rem;border-top:2px solid var(--accent)}
+.trust-grid p{margin-top:.55rem;font-size:.93rem;color:var(--dim);line-height:1.6;max-width:34ch}
+
+/* -------------------------------------------------------------------- cta */
+.closer{position:relative;isolation:isolate;text-align:center;
+  padding-block:clamp(4rem,2.5rem + 7vw,7.5rem);overflow:hidden}
+.closer::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(60% 80% at 50% 100%,var(--halo1),transparent 72%)}
+.closer p.line{font-size:clamp(1.45rem,1.1rem + 1.9vw,2.4rem);font-weight:700;
+  letter-spacing:-.02em;line-height:1.18;max-width:22ch;margin-inline:auto;
+  text-wrap:balance}
+.closer .cta-row{justify-content:center;margin-top:2.3rem}
+
+/* ----------------------------------------------------------------- footer */
+footer{border-top:1px solid var(--line);background:var(--bg);
+  padding-block:2.75rem 3.25rem;font-size:.9rem;color:var(--dim)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:.85rem 1.6rem;align-items:center}
+footer a{text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px}
+footer a:hover{color:var(--text);border-bottom-color:var(--accent)}
+footer .copy{margin-left:auto}
+@media (max-width:44rem){footer .copy{margin-left:0;width:100%}}
+
+/* ------------------------------------------------------------------ prose */
+.doc{padding-block:clamp(2.75rem,2rem + 4vw,5rem) clamp(3rem,2rem + 5vw,6rem)}
+.doc .wrap{width:min(100% - 2.5rem,46rem)}
+.doc h1{font-size:clamp(2rem,1.5rem + 2vw,2.9rem)}
+.doc .sub{margin-top:.7rem;color:var(--dim);font-size:1rem}
+.prose{margin-top:2.75rem;max-width:65ch}
+.prose h2{font-size:1.22rem;margin:2.9rem 0 .85rem;letter-spacing:-.015em}
+.prose h3{font-size:1.03rem;margin:2rem 0 .5rem;letter-spacing:-.01em}
+.prose p{margin:0 0 1.05rem;color:var(--dim);line-height:1.72}
+.prose strong{color:var(--text);font-weight:650}
+.prose em{color:var(--text);font-style:italic}
+.prose a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--glow)}
+.prose a:hover{border-bottom-color:var(--accent)}
+.prose ul{margin:0 0 1.2rem;padding-left:1.15rem;color:var(--dim)}
+.prose li{margin:.4rem 0;line-height:1.68}
+.prose li::marker{color:var(--accent)}
+.prose dl{margin:0}
+.prose dt{font-weight:650;color:var(--text);margin:2rem 0 .5rem;letter-spacing:-.01em}
+.prose dd{margin:0 0 1.05rem;color:var(--dim);line-height:1.72}
+.prose code{font:.88em/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;
+  background:var(--surface2);border:1px solid var(--line);border-radius:.35rem;
+  padding:.1em .4em;color:var(--text)}
+.prose hr{margin:3.25rem 0;border:0;border-top:1px solid var(--line)}
+.card,.lede-box{background:var(--surface);border:1px solid var(--line);
+  border-left:3px solid var(--accent);border-radius:.7rem;
+  padding:1.15rem 1.35rem;margin:0 0 1.6rem}
+.card p,.lede-box p{margin:0 0 .8rem}
+.card p:last-child,.lede-box p:last-child{margin:0}
+.doc-links{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);
+  font-size:.92rem;color:var(--dim);display:flex;flex-wrap:wrap;gap:.6rem 1.3rem}
+.doc-links a{text-decoration:none;border-bottom:1px solid var(--line)}
+.doc-links a:hover{color:var(--text);border-bottom-color:var(--accent)}
+
+/* ----------------------------------------------------------------- reveal */
+.js .reveal{opacity:0;transform:translateY(18px);
+  transition:opacity .7s cubic-bezier(.22,.7,.3,1),transform .7s cubic-bezier(.22,.7,.3,1)}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .js .reveal{opacity:1;transform:none;transition:none}
+  .badge:hover,.pill:hover{transform:none}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-<header>
-  <img src="assets/icon.png" alt="Juicy Jar app icon">
-  <h1>Juicy Jar</h1>
-  <p class="tag">Two cherries make a strawberry.<br>Keep going and you might just grow a watermelon.</p>
-  <span class="pill">iPhone · iOS 17 or later · free, no forced ads</span>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/img/icon-512.png" width="512" height="512" alt="">Juicy Jar</a>
+    <nav><a href="support.html">Support</a><a href="privacy.html">Privacy</a></nav>
+    <a class="pill" href="https://apps.apple.com/app/id6794601872">App&nbsp;Store</a>
+  </div>
 </header>
 
-<div class="shots">
-  <img src="assets/01-title.png" alt="The Juicy Jar title screen">
-  <img src="assets/03-late.png" alt="A jar filling up with merged fruit">
-  <img src="assets/05-score.png" alt="The end-of-run score card showing a new record">
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="kicker">One-thumb merge puzzle</p>
+      <h1>Keep going and you might just grow a watermelon.</h1>
+      <p class="lede">Drop fruit into the jar with one thumb. Matching fruit merges into the next one up — but everything you drop stays, and the jar fills faster than you think. Let the pile cross the line and the run is over.</p>
+      <div class="cta-row"><a class="badge" href="https://apps.apple.com/app/id6794601872"><img src="assets/img/app-store-badge.svg" width="160" height="53" alt="Download on the App Store"></a></div>
+      <p class="meta">iPhone · Free · Plays offline</p>
+    </div>
+    <div class="hero-art">
+      <div class="device">
+        <div class="screen">
+          <picture>
+            <source srcset="assets/img/shot-1-01-hook.webp" type="image/webp">
+            <img src="assets/img/shot-1-01-hook.jpg" width="760" height="1647" fetchpriority="high" decoding="async" alt="Juicy Jar gameplay: a jar packed with smiling fruit, two watermelons resting at the bottom and a score of 1,168.">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="features">
+    <section class="feature reveal">
+      <div class="feature-copy">
+        <p class="eyebrow">Chains</p>
+        <h2>Chain merges multiply your score.</h2>
+        <p>When a merge drops a new fruit straight into its twin, that second merge is a chain — and it pays a multiple of the normal score. Setting up cascades beats merging greedily.</p>
+      </div>
+      <div class="feature-art">
+        <div class="device">
+        <div class="screen">
+          <picture>
+            <source srcset="assets/img/shot-2-02-chains.webp" type="image/webp">
+            <img src="assets/img/shot-2-02-chains.jpg" width="760" height="1647" loading="lazy" decoding="async" alt="A 2 CHAIN bonus firing in the middle of the jar for +42 points.">
+          </picture>
+        </div>
+      </div>
+      </div>
+    </section>
+    <section class="feature reveal">
+      <div class="feature-copy">
+        <p class="eyebrow">The line</p>
+        <h2>Everything you drop stays.</h2>
+        <p>Real physics — every fruit rolls, settles and nudges the pile. Nothing disappears on its own, so the jar only ever gets fuller. Let the pile cross the dashed line and settle there, and the run ends.</p>
+      </div>
+      <div class="feature-art">
+        <div class="device">
+        <div class="screen">
+          <picture>
+            <source srcset="assets/img/shot-3-03-line.webp" type="image/webp">
+            <img src="assets/img/shot-3-03-line.jpg" width="760" height="1647" loading="lazy" decoding="async" alt="The jar filled close to the dashed line near the top of the screen.">
+          </picture>
+        </div>
+      </div>
+      </div>
+    </section>
+    <section class="feature reveal">
+      <div class="feature-copy">
+        <p class="eyebrow">Your best</p>
+        <h2>No timer. No pressure. Just the next run.</h2>
+        <p>One thumb, and your run is saved if you get interrupted. Undo, bomb and one more life after a game over are three items you only use if you want to, each recharged by watching an ad.</p>
+      </div>
+      <div class="feature-art">
+        <div class="device">
+        <div class="screen">
+          <picture>
+            <source srcset="assets/img/shot-4-04-best.webp" type="image/webp">
+            <img src="assets/img/shot-4-04-best.jpg" width="760" height="1647" loading="lazy" decoding="async" alt="The new record screen showing a best score of 1,412 with Play Again and Share.">
+          </picture>
+        </div>
+      </div>
+      </div>
+    </section>
+    <section class="feature reveal">
+      <div class="feature-copy">
+        <p class="eyebrow">Leaderboard</p>
+        <h2>See where you stand, if you want to.</h2>
+        <p>An optional Game Center leaderboard, for when you want to know how your jar compares. Decline it and nothing about the game changes.</p>
+      </div>
+      <div class="feature-art">
+        <div class="device">
+        <div class="screen">
+          <picture>
+            <source srcset="assets/img/shot-5-05-fair.webp" type="image/webp">
+            <img src="assets/img/shot-5-05-fair.jpg" width="760" height="1647" loading="lazy" decoding="async" alt="The Juicy Jar title screen: drop matching fruits to grow them, reach the watermelon before the line.">
+          </picture>
+        </div>
+      </div>
+      </div>
+    </section>
+  </div>
 </div>
 
-<h2>How it plays</h2>
-<p>Drop fruit into the jar with one thumb. Matching fruit merges into the next one
-up the ladder — but everything you drop stays, and the jar fills faster than you
-think. Let the pile cross the line and the run is over.</p>
+<section class="trust">
+  <div class="wrap">
+    <h2>What you get, and what you don&rsquo;t</h2>
+    <div class="trust-grid">
+      <div class="reveal"><h3>No forced ads</h3><p>No banners, no interstitials. Ads appear only when you tap to watch one.</p></div>
+      <div class="reveal"><h3>No sign-up</h3><p>No account, no profile, nothing to register.</p></div>
+      <div class="reveal"><h3>Plays offline</h3><p>The leaderboard and the item ads are the only optional extras.</p></div>
+      <div class="reveal"><h3>Two watermelons</h3><p>Touch and they cancel out for a jackpot.</p></div>
+    </div>
+  </div>
+</section>
 
-<h2>What makes it interesting</h2>
-<div class="grid">
-  <div class="card">
-    <h3>Chains, not luck</h3>
-    <p>When a merge drops a fruit straight into its twin, the chain multiplies your
-    score. Engineering cascades beats merging the moment you can.</p>
+<section class="closer">
+  <div class="wrap">
+    <p class="line">Two cherries make a strawberry. Two strawberries make a grape.</p>
+    <div class="cta-row"><a class="badge" href="https://apps.apple.com/app/id6794601872"><img src="assets/img/app-store-badge.svg" width="160" height="53" alt="Download on the App Store"></a></div>
   </div>
-  <div class="card">
-    <h3>Real physics</h3>
-    <p>Every fruit rolls, settles and shoves the pile. A careless drop on the left
-    can cost you the run thirty seconds later.</p>
-  </div>
-  <div class="card">
-    <h3>Nothing in the way</h3>
-    <p>No banners, no interstitials, no sign-up. An ad appears only if you tap to
-    watch one for an extra undo — ignore that button and you will never see one.</p>
-  </div>
-  <div class="card">
-    <h3>Picks up where you left off</h3>
-    <p>Close the app mid-run and the board is waiting exactly as you left it when
-    you come back.</p>
-  </div>
-</div>
-
-<h2>Sixteen languages</h2>
-<p>English, Korean, Japanese, Simplified and Traditional Chinese, Spanish,
-Brazilian Portuguese, French, German, Russian, Italian, Indonesian, Thai,
-Vietnamese, Turkish and Arabic — right-to-left included.</p>
+</section>
+</main>
 
 <footer>
-  <a href="support.html">Support</a> · <a href="privacy.html">Privacy Policy</a><br>
-  © 2026 Juicy Jar. All rights reserved.
+  <div class="wrap">
+    <a href="support.html">Support</a> <a href="privacy.html">Privacy</a> <a href="mailto:richohios@gmail.com">richohios@gmail.com</a>
+    <span class="copy">© 2026 Won Seok Oh</span>
+  </div>
 </footer>
-
-</div>
+<script>document.documentElement.classList.add('js');
+(function(){
+  var bar=document.querySelector('.bar');
+  if(bar){var s=function(){bar.classList.toggle('is-stuck',window.scrollY>4)};
+    s();addEventListener('scroll',s,{passive:true});}
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    for(var i=0;i<els.length;i++)els[i].classList.add('in');return;}
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  for(var j=0;j<els.length;j++)io.observe(els[j]);
+})();</script>
 </body>
 </html>
