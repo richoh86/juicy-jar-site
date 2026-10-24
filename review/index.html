@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Juicy Jar — App Review demo video</title>
+<title>Juicy Jar — App Review page</title>
 <style>
   :root { color-scheme: light dark; --ink:#1c1a22; --dim:#6c6577; --bg:#fff; --card:#fff6ec; --line:#f2d9bd; }
   @media (prefers-color-scheme: dark) {
@@ -18,7 +18,10 @@
   .wrap { max-width: 34rem; margin: 0 auto; }
   h1 { font-size: 1.6rem; letter-spacing: -.02em; margin: 0 0 .3rem; }
   p.sub { color: var(--dim); margin: 0 0 1.8rem; }
-  video { width: 100%; max-width: 100%; border-radius: 18px; background: #000; display: block; }
+  .shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 0; }
+  .shots figure { margin: 0; }
+  .shots img { width: 100%; height: auto; border-radius: 18px; background: #000; display: block; }
+  .shots figcaption { color: var(--dim); font-size: .85rem; margin-top: .4rem; }
   .meta { margin-top: 1.6rem; padding: 1rem 1.2rem; background: var(--card); border: 1px solid var(--line); border-radius: 14px; font-size: .93rem; }
   .meta dt { color: var(--dim); font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; margin-top: .8rem; }
   .meta dt:first-child { margin-top: 0; }
@@ -28,46 +31,30 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>Juicy Jar — demo video</h1>
-  <p class="sub">Provided for App Review. Screen recording captured on a physical iPhone.</p>
-  <p class="sub">Archived: this recording and the notes below describe an early version of
-     Juicy Jar. Later versions add an optional Game Center leaderboard, optional
+  <h1>Juicy Jar — App Review page</h1>
+  <p class="sub">Not a marketing page. This page was made for App Review.</p>
+  <p class="sub">Archived: the screen recording once shown here was of an early version of
+     Juicy Jar and is no longer shown. Later versions add an optional Game Center leaderboard, optional
      rewarded ads, a tracking permission prompt and an optional one-time purchase. See
-     the <a href="../support.html">support page</a> and
+     the <a href="../">Juicy Jar home page</a>, the <a href="../support.html">support page</a> and
      <a href="../privacy.html">privacy policy</a> for the current version.</p>
 
-  <video controls playsinline preload="metadata" src="juicy-jar-demo.mp4"></video>
+  <div class="shots">
+    <figure><img src="../assets/release-1.2.5/en-title.webp" width="760" height="1652" loading="lazy" decoding="async" alt="The Juicy Jar title screen over an empty jar: Drop matching fruits to grow them. Grow the biggest fruit before the line. A Tap to start button."><figcaption>Title screen</figcaption></figure>
+    <figure><img src="../assets/release-1.2.5/en-late.webp" width="760" height="1652" loading="lazy" decoding="async" alt="A merge popping in the jar for +21 points, with a score of 294 and a cherry waiting to drop."><figcaption>A merge</figcaption></figure>
+    <figure><img src="../assets/release-1.2.5/en-full.webp" width="760" height="1652" loading="lazy" decoding="async" alt="A score of 554 with an orange about to drop over a pile of fruit below the red dashed line."><figcaption>The line</figcaption></figure>
+    <figure><img src="../assets/release-1.2.5/en-showcase.webp" width="760" height="1652" loading="lazy" decoding="async" alt="A score of 1,142 and a jar packed with fruit, with a big pineapple and a peach in the middle."><figcaption>A fuller jar</figcaption></figure>
+    <figure><img src="../assets/release-1.2.5/en-score.webp" width="760" height="1652" loading="lazy" decoding="async" alt="The New Record! card: 1,273 points, best 1,273, a peach as the biggest fruit, and Play Again and Share buttons."><figcaption>New record</figcaption></figure>
+  </div>
 
   <dl class="meta">
     <dt>App</dt>
     <dd>Juicy Jar — a single-player physics merge puzzle</dd>
 
-    <dt>Captured on</dt>
-    <dd>iPhone 15, iOS 26.5.2 — a physical device.</dd>
-
-    <dt>What the recording shows</dt>
-    <dd>Launching the app from the Home Screen, the title screen, and a
-        complete run from the first drop: matching fruit merging into the
-        next one up, chain merges applying a score multiplier, the run
-        ending when the pile crosses the line, the new high score, and the
-        button to play again.</dd>
-
-    <dt>Language</dt>
-    <dd>The device in the recording is set to Korean. The app is localized
-        into 16 languages and behaves identically in every one; only the
-        displayed text changes.</dd>
-
-    <dt>Accounts, purchases, permissions</dt>
-    <dd>None. The app has no account, login, in-app purchase, subscription,
-        user-generated content, or permission prompt, so there are no such
-        flows to demonstrate.</dd>
-
-    <dt>Network</dt>
-    <dd>None. The app makes no network requests and can be reviewed in
-        Airplane Mode.</dd>
-
-    <dt>Direct file</dt>
-    <dd><a href="juicy-jar-demo.mp4">juicy-jar-demo.mp4</a></dd>
+    <dt>Screens</dt>
+    <dd>Juicy Jar 1.2.5 (build 13) in English, captured in a screenshot mode
+        in which ads are not shown. They are the same screens as on the
+        <a href="../">home page</a>.</dd>
   </dl>
 </div>
 </body>
